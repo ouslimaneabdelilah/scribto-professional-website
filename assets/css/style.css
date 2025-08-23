@@ -642,6 +642,16 @@ body {
     animation: zoomIn 0.3s ease;
 }
 
+.modal-pdf {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    display: none;
+    animation: zoomIn 0.3s ease;
+}
+
 .modal-caption {
     color: var(--white);
     text-align: center;
@@ -752,3 +762,6 @@ body {
         padding: 0 1rem;
     }
 }
+
+
+

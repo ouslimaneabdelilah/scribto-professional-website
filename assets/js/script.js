@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Modal functionality for screenshots
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
+    const modalPdf = document.getElementById('modalPdf');
     const modalCaption = document.getElementById('modalCaption');
     const closeBtn = document.querySelector('.modal-close');
     const screenshotItems = document.querySelectorAll('.screenshot-item');
@@ -77,10 +78,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         item.addEventListener('click', function() {
             const img = this.querySelector('img');
-            const title = this.querySelector('h3').textContent;
-            const description = this.querySelector('p').textContent;
-            modalImage.src = img.src;
-            modalImage.alt = img.alt;
+            const iframe = this.querySelector('iframe');
+            const title = this.querySelector('h3') ? this.querySelector('h3').textContent : '';
+            const description = this.querySelector('p') ? this.querySelector('p').textContent : '';
+            if (img) {
+                modalImage.src = img.src;
+                modalImage.alt = img.alt;
+                modalImage.style.display = 'block';
+                modalPdf.style.display = 'none';
+            } else if (iframe) {
+                modalPdf.src = iframe.src;
+                modalPdf.style.display = 'block';
+                modalImage.style.display = 'none';
+            }
             modalCaption.innerHTML = `<strong>${title}</strong><br>${description}`;
             modal.style.display = 'block';
             modal.style.opacity = '0';
@@ -106,6 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+            modalImage.src = '';
+            modalPdf.src = '';
+            modalImage.style.display = 'none';
+            modalPdf.style.display = 'none';
         }, 300);
     }
 
